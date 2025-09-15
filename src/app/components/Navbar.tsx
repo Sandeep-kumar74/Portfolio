@@ -1,26 +1,18 @@
 "use client";
 
-import { MoonIcon, SunIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MoonIcon, SunIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useTheme } from "../context/ThemeContext"; // <-- apne ThemeContext ka sahi path lagayein
 
 const Navbar = () => {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const { theme, toggleTheme } = useTheme();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    if (typeof window !== "undefined") {
-      if (newTheme === "dark") document.documentElement.classList.add("dark");
-      else document.documentElement.classList.remove("dark");
-    }
-  };
-
   const toggleMobileMenuOpen = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileMenuOpen((s) => !s);
   };
 
   const menuItem = [
@@ -31,15 +23,8 @@ const Navbar = () => {
     { href: "/contact", label: "Contact" },
   ];
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (theme === "dark") document.documentElement.classList.add("dark");
-      else document.documentElement.classList.remove("dark");
-    }
-  }, []);
-
   return (
-    <nav className="fixed w-full bg-gray-100 dark:bg-gray-800 z-50 shadow-md">
+    <nav className="fixed w-full bg-white/80 dark:bg-dark/80 backdrop-blur-sm z-50 border-b border-gray-200 dark:border-gray-700 shadow-sm">
       <div className="container max-w-7xl mx-auto px-4">
         {/* 🖥️ Desktop Navbar */}
         <div className="flex items-center justify-between h-16">
@@ -56,18 +41,20 @@ const Navbar = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`hover:text-primary transition-colors font-medium ${isActive ? "text-primary" : "text-white"
-                    }`}
+                  className={`hover:text-primary transition-colors font-medium ${
+                    isActive ? "text-primary" : "text-gray-700 dark:text-gray-200"
+                  }`}
                 >
                   {item.label}
                 </Link>
               );
             })}
 
-            {/* 🌗 Desktop Theme toggle button */}
+            {/* 🌗 Theme toggle button */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-gray-700 text-primary dark:hover:bg-gray-800 transition-colors cursor-pointer"
+              aria-label="Toggle theme"
+              className="p-2 rounded-lg hover:bg-gray-100 dark:text-white hover:text-primary dark:hover:bg-gray-800 transition-colors cursor-pointer"
             >
               {theme === "dark" ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
             </button>
@@ -77,25 +64,15 @@ const Navbar = () => {
           <button
             onClick={toggleMobileMenuOpen}
             className="md:hidden p-2 rounded-lg dark:hover:bg-gray-800 transition-colors cursor-pointer"
+            aria-label="Open menu"
           >
             {isMobileMenuOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* 📱 Mobile Menu Items with Logo & Dark/Light Toggle */}
-        <div
-          className={`fixed top-0 left-0 h-full w-64 transform transition-transform duration-300 ease-in-out z-50 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-            }`}
-        >
-          {/* 🌟 Mobile Logo - same background as desktop navbar */}
-          <div className="bg-gray-100 dark:bg-gray-800 p-6">
-            <Link href="/" className="text-2xl font-bold text-primary block">
-              Portfolio
-            </Link>
-          </div>
-
-          {/* Remaining mobile menu items - slightly darker than desktop navbar */}
-          <div className="bg-gray-200 dark:bg-gray-700 h-full p-6 flex flex-col space-y-4">
+        {/* 📱 Mobile Menu Items */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden flex flex-col space-y-2 pt-2">
             {menuItem.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -103,8 +80,8 @@ const Navbar = () => {
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block py-2 font-medium ${isActive ? "text-primary" : "text-white"
-                    } hover:text-primary`}
+                  className={`block w-full px-2 py-2 rounded-md text-base font-medium transition-colors
+                    ${isActive ? "text-primary" : "text-gray-700 dark:text-gray-200"} hover:text-primary`}
                 >
                   {item.label}
                 </Link>
@@ -114,18 +91,22 @@ const Navbar = () => {
             {/* 🌗 Mobile Theme toggle button */}
             <button
               onClick={toggleTheme}
-              className="mt-4 flex items-center gap-2 p-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 text-primary transition-colors cursor-pointer"            >
-              {theme === "dark" ? (<><SunIcon className="w-5 h-5" />Light Mode</>) : (<><MoonIcon className="w-5 h-5" />Dark Mode</>)}
+              className="flex w-full items-center justify-start gap-2 px-2 py-2 rounded-md text-base font-medium 
+              text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            >
+              {theme === "dark" ? (
+                <>
+                  <SunIcon className="w-5 h-5" />
+                  <span>Light Mode</span>
+                </>
+              ) : (
+                <>
+                  <MoonIcon className="w-5 h-5" />
+                  <span>Dark Mode</span>
+                </>
+              )}
             </button>
           </div>
-        </div>
-
-        {/* Overlay when mobile menu is open */}
-        {isMobileMenuOpen && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
-            onClick={() => setIsMobileMenuOpen(false)}
-          ></div>
         )}
       </div>
     </nav>
