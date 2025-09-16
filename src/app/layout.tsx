@@ -35,7 +35,7 @@ export default function RootLayout({
           <Navbar />
           <main className="min-h-screen pt-24">{children}</main>
           <footer className="text-center py-4 text-gray-400">
-            © {new Date().getFullYear()} Portfolio
+            © {new Date().getFullYear()} Sandeep Kumar
           </footer>
         </ThemeProvider>
       </body>

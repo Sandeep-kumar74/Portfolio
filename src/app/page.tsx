@@ -1,7 +1,13 @@
-
+import Hero from "./components/Hero";
+import Projects from "./components/Projects";
+import Blogs from "./components/Blogs";
 
 export default function Home() {
   return (
-   <h1>Home page</h1>
+    <>
+      <Hero />
+      <Projects />
+      <Blogs/>
+    </>
   );
 }
