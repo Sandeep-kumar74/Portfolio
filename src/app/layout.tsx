@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
-import { ThemeProvider } from "./context/ThemeContext"; // ✅ import added
+import { ThemeProvider } from "./context/ThemeContext";
+import Footer from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,9 +35,10 @@ export default function RootLayout({
         <ThemeProvider>
           <Navbar />
           <main className="min-h-screen pt-24">{children}</main>
-          <footer className="text-center py-4 text-gray-400">
+          <Footer/>
+          {/* <footer className="text-center py-4 text-gray-400">
             © {new Date().getFullYear()} Sandeep Kumar
-          </footer>
+          </footer> */}
         </ThemeProvider>
       </body>
     </html>
