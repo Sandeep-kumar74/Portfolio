@@ -1,8 +1,11 @@
+'use client'
+
 import { projects } from '@/contents/projects'
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { FaGithub, FaExternalLinkSquareAlt } from 'react-icons/fa'
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
+import { motion } from 'framer-motion'
+import { cardHoverSmall, fadeInUp, staggerContainer } from '../utils/animation'
 
 const Project = () => {
   return (
@@ -12,64 +15,106 @@ const Project = () => {
         Here are some of my recent projects. Click on the links to view the code or live demo.
       </p>
 
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+      >
         {projects.map((project) => (
-          <article 
-            key={project.title} 
-            className='bg-white dark:bg-dark/50 rounded-lg shadow p-6'
+          <motion.article
+            key={project.title}
+            className="bg-white dark:bg-dark/50 rounded-lg shadow-md p-6 flex flex-col justify-between"
+            variants={fadeInUp}
+            whileHover={cardHoverSmall.whileHover}
           >
             {/* Project Image */}
-            <div className='relative aspect-video mb-4 rounded-lg overflow-hidden'>
-              <Image 
-                src={project.image} 
-                alt={project.title} 
-                fill 
-                className='object-cover rounded-md'
-                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+            <motion.div
+              className="relative aspect-video mb-4 rounded-lg overflow-hidden"
+              whileHover={{ scale: 1.05, boxShadow: '0 8px 20px rgba(0,0,0,0.15)' }}
+              transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+            >
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-            </div>
+            </motion.div>
 
-            {/* Project Title & Description */}
-            <h3 className='text-lg font-semibold text-center mb-2'>
+            {/* Title */}
+            <motion.h3
+              className="text-xl font-semibold mb-2"
+              whileHover={{ x: 5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
               {project.title}
-            </h3>
-            <p className='text-gray-600 dark:text-gray-300 mb-4'>
+            </motion.h3>
+
+            {/* Description */}
+            <motion.p
+              className="text-gray-600 dark:text-gray-300 mb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
               {project.description}
-            </p>
+            </motion.p>
 
             {/* Technologies */}
-            <div className='flex flex-wrap justify-center gap-2 mb-4'>
-              {project.technologies.map((tech, index) => (
-                <span 
-                  key={index} 
-                  className='px-3 py-1 bg-primary/10 text-primary rounded-full text-sm'
+            <motion.div
+              className="flex flex-wrap gap-2 mb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              {project.technologies.map((tech) => (
+                <motion.span
+                  key={tech}
+                  className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {tech}
-                </span>
+                </motion.span>
               ))}
-            </div>
+            </motion.div>
 
-            {/* Links */}
-            <div className="flex justify-center gap-6">
-              <Link 
-                href={project.githubLink} 
-                target='_blank' 
-                className='flex items-center gap-2 text-secondary hover:text-primary transition-colors'
+            {/* Links - always horizontal */}
+            <motion.div
+              className="flex flex-row gap-4 mt-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <motion.a
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
+                whileHover={{ x: 5 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <FaGithub className='w-5 h-5'/> <span>Code</span>
-              </Link>
+                <FaGithub className="h-5 w-5" />
+                <span>Code</span>
+              </motion.a>
 
-              <Link 
-                href={project.githubLink} 
-                target='_blank' 
-                className='flex items-center gap-2 text-secondary hover:text-primary transition-colors'
+              <motion.a
+                href={project.demoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
+                whileHover={{ x: 5 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <FaExternalLinkSquareAlt className='w-5 h-5'/> <span>Live Demo</span>
-              </Link>
-            </div>
-          </article>
+                <FaExternalLinkAlt className="h-5 w-5" />
+                <span>Live Demo</span>
+              </motion.a>
+            </motion.div>
+          </motion.article>
         ))}
-      </div>
+      </motion.div>
     </div>
   )
 }
