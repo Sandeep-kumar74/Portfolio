@@ -10,10 +10,22 @@ import { cardHoverSmall, fadeInUp, staggerContainer } from '../utils/animation'
 const Project = () => {
   return (
     <div className='container max-w-7xl mx-auto py-20 px-4'>
-      <h1 className='text-4xl font-bold mb-4 text-center'>My Projects</h1>
-      <p className='text-center mb-24 mt-4 text-secondary text-lg'>
+      <motion.h1 
+      className='text-4xl font-bold mb-4 text-center'
+      initial={{ opacity: 0, y: -20}}
+      animate={{ opacity: 1, y: 0}}
+      transition={{duration: 0.5}}
+      >
+        My Projects
+      </motion.h1>
+      <motion.p 
+      className='text-center mb-24 mt-4 text-secondary text-lg'
+      initial={{ opacity: 0, y: 20}}
+      animate={{ opacity: 1, y: 0}}
+      transition={{duration: 0.5, delay: 0.2}}
+      >
         Here are some of my recent projects. Click on the links to view the code or live demo.
-      </p>
+      </motion.p>
 
       <motion.div
         className="grid grid-cols-1 md:grid-cols-3 gap-8"
