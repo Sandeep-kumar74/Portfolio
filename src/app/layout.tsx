@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import { ThemeProvider } from "./context/ThemeContext";
 import Footer from "./components/Footer";
+import icons from "react-icons/fa"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,9 +17,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Sandeep | Portfolio",
   description: "Personal portfolio website",
+  icons: {
+  icon: "/projects/S-logoicon.png"
+}
 };
+
+
 
 export default function RootLayout({
   children,
