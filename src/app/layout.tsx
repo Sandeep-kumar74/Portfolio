@@ -20,9 +20,12 @@ export const metadata: Metadata = {
   title: "Sandeep | Portfolio",
   description: "Personal portfolio website",
   icons: {
-  icon: "/projects/S-logoicon.png"
-}
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png", // agar generate hua ho to
+  },
 };
+
 
 
 
