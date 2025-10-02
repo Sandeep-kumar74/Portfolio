@@ -30,6 +30,8 @@ const About = () => {
         animate="animate"
         variants={fadeInUp}
       >
+        <h2>Hi,I'm Sandeep Kumar</h2>
+        <p className="text-lg text-secondary max-w-3xl mx-auto">I'm a 3rd-Year BCA student from INDIA</p>
         <p className="text-lg text-secondary max-w-3xl mx-auto">
           I'm a passionate Full Stack Developer with expertise in building modern web applications.
           With a strong foundation in both frontend and backend technologies, I create seamless user

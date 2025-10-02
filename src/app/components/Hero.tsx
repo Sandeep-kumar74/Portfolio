@@ -83,34 +83,42 @@ const Hero = () => {
         </motion.div>
 
         {/* Buttons */}
-        <motion.div 
-            className="flex flex-col md:flex-row justify-center gap-4"
-            {...fadeInUp}
-            transition={{ delay: 0.6 }}
-          >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+        <motion.div
+          className="flex flex-col md:flex-row justify-center gap-4"
+          {...fadeInUp}
+          transition={{ delay: 0.6 }}
+        >
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Link
+              href="/projects"
+              className="bg-primary inline-block w-full md:w-auto text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors"
             >
-              <Link
-                href="/projects"
-                className="bg-primary inline-block w-full md:w-auto text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors"
-              >
-                View Projects
-              </Link>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link
-                href="/contact"
-                className=" inline-block w-full bg-gray-500  md:w-auto text-gray-800 dark:text-white px-8 py-3 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-              >
-                Contact Me
-              </Link>
-            </motion.div>
+              View Projects
+            </Link>
           </motion.div>
+
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Link
+              href="/contact"
+              className="inline-block w-full bg-gray-500 md:w-auto text-gray-800 dark:text-white px-8 py-3 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+            >
+              Contact Me
+            </Link>
+          </motion.div>
+
+          {/* ✅ New Download CV Button */}
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <a
+              href="/resume.pdf"
+              download="Sandeep-Kumar-Resume.pdf"
+              className="inline-block w-full md:w-auto bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors"
+            >
+              Download CV
+            </a>
+          </motion.div>
+        </motion.div>
+
+
 
       </div>
     </section>
