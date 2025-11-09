@@ -129,11 +129,11 @@ const About = () => {
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <h3 className="text-xl font-semibold mb-2">Senior Full Stack Developer</h3>
-            <p className="text-primary mb-4">Company Name - 2020 - Present</p>
+            <h3 className="text-xl font-semibold mb-2">Member, Soft Computing Research Society Student Chapter</h3>
+            <p className="text-primary mb-4">Babu Banarasi Das University, Lucknow 2023-26</p>
             <ul className="text-secondary list-disc list-inside space-y-2">
-              <li>Led development of multiple web applications using React and Node.js</li>
-              <li>Implemented CI/CD pipeline reducing deployment time by 50%</li>
+              <li>Led development of multiple web applications</li>
+              <li>Participating in technical events software exhibition with 2nd position</li>
               <li>Mentored junior developers and conducted code reviews</li>
             </ul>
           </motion.div>
@@ -145,10 +145,10 @@ const About = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <h3 className="text-xl font-semibold mb-2">Full Stack Developer</h3>
-            <p className="text-primary mb-4">Previous Company - 2023 - 2026</p>
+            <p className="text-primary mb-4">Self-Employed with Friends Remote</p>
             <ul className="text-secondary list-disc list-inside space-y-2">
-              <li>Developed and maintained RESTful APIs</li>
-              <li>Built responsive user interfaces with modern JavaScript frameworks</li>
+              <li>Developed and maintained RESTful APIs </li>
+              <li>Built responsive user interfaces with modern Next.js frameworks</li>
               <li>Optimized database queries improving performance by 100%</li>
             </ul>
           </motion.div>
