@@ -109,7 +109,7 @@ const Hero = () => {
           {/* ✅ New Download CV Button */}
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <a
-              href="/resume.pdf"
+              href="/Sandeep-Kumar-Resume.pdf"
               download="Sandeep-Kumar-Resume.pdf"
               className="inline-block w-full md:w-auto bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors"
             >
